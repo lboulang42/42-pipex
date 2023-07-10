@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:37:15 by lboulang          #+#    #+#             */
-/*   Updated: 2023/06/27 14:34:56 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:34:58 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void		ft_clear_pipex(t_pipex *pipex);
 /*acces_bonus.c*/
 void		ft_get_exec_assets(t_pipex *pipex, char *command);
 char		*ft_join_path(char *try_path, char *cmd_name);
-char		*ft_check_acces(char **env_path, char *cmd_name);
+char		*ft_check_acces(char **env_path, char *cmd_name, int i);
 void		ft_access_fail(char *cmd_path, char *cmd_name);
 char		**ft_get_env_path(char **env);
 /*gnl_bonus.c*/
