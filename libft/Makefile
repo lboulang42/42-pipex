@@ -6,7 +6,7 @@
 #    By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/09 17:31:43 by lboulang          #+#    #+#              #
-#    Updated: 2023/06/26 16:49:21 by lboulang         ###   ########.fr        #
+#    Updated: 2023/07/10 14:58:25 by lboulang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,29 +39,23 @@ OBJ = $(SRCS:.c=.o)
 CC = @ gcc
 CFLAGS = -g3 -Wall -Werror -Wextra -I.
 #VISUAL
-LOADING_BAR = @echo -n "......................" ; sleep 0.05 ; echo -n "......................" ; sleep 0.05 ; echo -n "......................"; sleep 0.05; echo -n "......................"
 BOLD_TEXT = \033[1m
 RESET_TEXT = \033[0m
 
 $(NAME):$(OBJ)
-
-	@echo "🟦📘🟦📘🟦📘🟦📘🟦📘🟦📘🟦📘| 📚 MAKING $(BOLD_TEXT)LIBFT$(RESET_TEXT) 📚 |🟦📘🟦📘🟦📘🟦📘🟦📘🟦📘🟦📘"
-	$(LOADING_BAR)
 	@ar rcs $(NAME) $(OBJ)
-	@echo "\n🟩✅🟩✅🟩✅🟩✅🟩✅🟩✅🟩✅ | 📚 $(BOLD_TEXT)LIBFT$(RESET_TEXT) MAKED 📚 |🟩✅🟩✅🟩✅🟩✅🟩✅🟩✅🟩✅\n"
+	@echo "$(BOLD_TEXT)LIBFT$(RESET_TEXT) MAKED ✅\n"
 
 all: $(NAME)
 
 clean : 
-	@echo "🧽📚🧽📚🧽📚🧽📚🧽📚🧽📚🧽📚 | 🧽📚 CLEANING $(BOLD_TEXT)LIBFT$(RESET_TEXT) 📚🧽 | 🧽📚🧽📚🧽📚🧽📚🧽📚🧽📚🧽📚"
-	$(LOADING_BAR)
 	@rm -f $(OBJ)
-	@echo "\n🚮📚🚮📚🚮📚🚮📚🚮📚🚮📚🚮📚 | 🚮📚 $(BOLD_TEXT)LIBFT$(RESET_TEXT) CLEANED 📚🚮 | 🚮📚🚮📚🚮📚🚮📚🚮📚🚮📚🚮📚\n"
+	@echo "$(BOLD_TEXT)LIBFT$(RESET_TEXT) CLEANED 🚮\n"
 
 fclean : clean
-	@echo "🧼📚🧼📚🧼📚🧼📚🧼📚🧼📚🧼📚 | 🧼📚  FCLEANING $(BOLD_TEXT)LIBFT$(RESET_TEXT) 📚🧼 |🧼📚🧼📚🧼📚🧼📚🧼📚🧼📚🧼📚"
-	$(LOADING_BAR)
 	@rm -f $(NAME)
-	@echo "\n🚱📚🚱📚🚱📚🚱📚🚱📚🚱📚🚱📚 | 🚱📚 $(BOLD_TEXT)LIBFT$(RESET_TEXT) FCLEANED 📚🚱 |🚱📚🚱📚🚱📚🚱📚🚱📚🚱📚🚱📚\n\n"
+	@echo "$(BOLD_TEXT)LIBFT$(RESET_TEXT) FCLEANED 🚮\n"
 
-re : @fclean $(NAME)
+re : fclean $(NAME)
+
+.PHONY : all clean fclean re
