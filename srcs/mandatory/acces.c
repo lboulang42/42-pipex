@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/09 20:58:51 by lboulang          #+#    #+#             */
-/*   Updated: 2023/06/25 16:53:18 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:34:18 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_get_exec_assets(t_pipex *pipex, char *command)
 	pipex->cmd_args = ft_split(command, ' ');
 	if (!pipex->cmd_args)
 		return ;
-	pipex->cmd_path = ft_check_acces(pipex->env_path, pipex->cmd_args[0]);
+	pipex->cmd_path = ft_check_acces(pipex->env_path, pipex->cmd_args[0], -1);
 }
 
 char	*ft_join_path(char *try_path, char *cmd_name)
@@ -40,22 +40,23 @@ char	*ft_join_path(char *try_path, char *cmd_name)
 }
 
 /*
-check if the cmd_name inputed is a global path, check if its accessible, if not
-send error message, if it is return cmd_path.
-if the cmd_name is not a global check every possible path using env $PATH
-if every possible path have been checked and we hvnt found the command / can't
-use it send error message. else return cmd_path.
+separate way if cmd is global path / only name / only name without PATH in env
 */
-char	*ft_check_acces(char **env_path, char *cmd_name)
+char	*ft_check_acces(char **env_path, char *cmd_name, int i)
 {
 	char	*cmd_path;
-	int		i;
 
-	i = -1;
 	if (!ft_strncmp(cmd_name, "/", 1))
 	{
 		cmd_path = ft_strdup(cmd_name);
 		if (!access(cmd_path, F_OK | X_OK))
+			return (cmd_path);
+		return (ft_access_fail(cmd_path, cmd_name), NULL);
+	}
+	if (!env_path)
+	{
+		cmd_path = ft_strdup(cmd_name);
+		if (!access(cmd_name, F_OK | X_OK))
 			return (cmd_path);
 		return (ft_access_fail(cmd_path, cmd_name), NULL);
 	}
@@ -66,10 +67,8 @@ char	*ft_check_acces(char **env_path, char *cmd_name)
 			return (cmd_path);
 		if (env_path[i + 1])
 			free(cmd_path);
-		else
-			return (ft_access_fail(cmd_path, cmd_name), NULL);
 	}
-	return (NULL);
+	return (ft_access_fail(cmd_path, cmd_name), NULL);
 }
 
 /*
@@ -84,7 +83,7 @@ void	ft_access_fail(char *cmd_path, char *cmd_name)
 		return ;
 	}
 	if (access(cmd_path, F_OK))
-		ft_printf("Pipex: %s : '%s'\n", ERR_CMD, cmd_name);
+		ft_printf("Pipex: %s: '%s'\n", cmd_name, ERR_CMD);
 	else if (access(cmd_path, X_OK))
 		ft_printf("Pipex: %s: %s\n", cmd_path, ERR_PERM);
 	free(cmd_path);

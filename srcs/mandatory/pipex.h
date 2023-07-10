@@ -6,7 +6,7 @@
 /*   By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 17:37:15 by lboulang          #+#    #+#             */
-/*   Updated: 2023/06/26 18:23:50 by lboulang         ###   ########.fr       */
+/*   Updated: 2023/07/10 14:32:42 by lboulang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@
 # endif
 
 # ifndef ERR_CMD
-#  define ERR_CMD "command not found: "
+#  define ERR_CMD "command not found"
 # endif
 # ifndef ERR_PERM
 #  define ERR_PERM "permission denied"
@@ -69,7 +69,7 @@ void		ft_clear_pipex(t_pipex *pipex);
 /*acces.c*/
 void		ft_get_exec_assets(t_pipex *pipex, char *command);
 char		*ft_join_path(char *try_path, char *cmd_name);
-char		*ft_check_acces(char **env_path, char *cmd_name);
+char		*ft_check_acces(char **env_path, char *cmd_name, int i);
 void		ft_access_fail(char *cmd_path, char *cmd_name);
 char		**ft_get_env_path(char **env);
 
