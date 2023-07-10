@@ -6,7 +6,7 @@
 #    By: lboulang <lboulang@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/09 17:31:43 by lboulang          #+#    #+#              #
-#    Updated: 2023/06/27 14:33:20 by lboulang         ###   ########.fr        #
+#    Updated: 2023/07/10 14:57:11 by lboulang         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,6 @@ OBJS_BONUS = ${SRCS_BONUS:.c=.o }
 CC = @ gcc
 CFLAGS = -g3 -Wall -Werror -Wextra -I .
 #VISUAL
-LOADING_BAR = @echo -n "......................" ; sleep 0.05 ; echo -n "......................" ; sleep 0.05 ; echo -n "......................"; sleep 0.05; echo -n "......................"
 BOLD_TEXT = \033[1m
 RESET_TEXT = \033[0m
 
@@ -40,43 +39,30 @@ all: ${NAME}
 
 $(NAME) : ${OBJS}
 	@make --no-print-directory  -C ./libft/
-	@echo -n "\n🟦📘🟦📘🟦📘🟦📘🟦📘🟦📘 | 🍀🔌 MAKING PIPEX $(BOLD_TEXT)MANDATORY$(RESET_TEXT) 🔌🍀 | 🟦📘🟦📘🟦📘🟦📘🟦📘🟦📘\n"
-	${LOADING_BAR}
 	$(CC) ${OBJS} ${LIBFT} -o ${NAME}
-	@echo "\n🟩✅🟩✅🟩✅🟩✅🟩✅🟩✅ | 🍀🔌 PIPEX $(BOLD_TEXT)MANDATORY$(RESET_TEXT) MAKED 🔌🍀 | 🟩✅🟩✅🟩✅🟩✅🟩✅🟩✅\n\n"
+	@echo "PIPEX $(BOLD_TEXT)MANDATORY$(RESET_TEXT) MAKED ✅\n"
 	
 bonus : ${OBJS_BONUS}
 	@make --no-print-directory  -C ./libft/
-	@echo -n "\n🟦📘🟦📘🟦📘🟦📘🟦📘🟦📘 | 🔥🔌 MAKING PIPEX $(BOLD_TEXT)BONUS$(RESET_TEXT) 🔌🔥 | 🟦📘🟦📘🟦📘🟦📘🟦📘🟦📘\n"
-	${LOADING_BAR}
 	@$(CC) ${OBJS_BONUS} ${LIBFT} -o ${NAME_BONUS}
-	@echo "\n🟩✅🟩✅🟩✅🟩✅🟩✅🟩✅ | 🔥🔌 PIPEX $(BOLD_TEXT)BONUS$(RESET_TEXT) MAKED 🔌🔥 | 🟩✅🟩✅🟩✅🟩✅🟩✅🟩✅\n\n"
+	@echo "PIPEX $(BOLD_TEXT)BONUS$(RESET_TEXT) MAKED ✅\n"
 	
 
 clean : 
 	@make --no-print-directory clean -C ./libft/
-	@echo "\n🧽🔌🧽🔌🧽🔌🧽🔌🧽🔌🧽🔌🧽🔌 | 🍀🔌 CLEANING PIPEX $(BOLD_TEXT)MANDATORY$(RESET_TEXT) 🔌🍀 | 🧽🔌🧽🔌🧽🔌🧽🔌🧽🔌🧽🔌🧽🔌"
-	${LOADING_BAR}
 	@rm -rf ${OBJS} 
-	@echo "\n🚮🔌🚮🔌🚮🔌🚮🔌🚮🔌🚮🔌🚮🔌 | 🍀🔌 PIPEX $(BOLD_TEXT)MANDATORY$(RESET_TEXT) CLEANED 🔌🍀 | 🚮🔌🚮🔌🚮🔌🚮🔌🚮🔌🚮🔌🚮🔌"
-	@echo "\n🧽🔌🧽🔌🧽🔌🧽🔌🧽🔌🧽🔌🧽🔌 | 🔥🔌 CLEANING PIPEX $(BOLD_TEXT)BONUS$(RESET_TEXT) 🔌🔥 | 🧽🔌🧽🔌🧽🔌🧽🔌🧽🔌🧽🔌🧽🔌"
-	$(LOADING_BAR)
+	@echo "PIPEX $(BOLD_TEXT)MANDATORY$(RESET_TEXT) CLEANED 🚮\n"
 	@rm -rf ${OBJS_BONUS} 
-	@echo "\n🚮🔌🚮🔌🚮🔌🚮🔌🚮🔌🚮🔌🚮🔌 | 🔥🔌 PIPEX $(BOLD_TEXT)BONUS$(RESET_TEXT) CLEANED 🔌🔥 | 🚮🔌🚮🔌🚮🔌🚮🔌🚮🔌🚮🔌🚮🔌\n\n"
+	@echo "PIPEX $(BOLD_TEXT)BONUS$(RESET_TEXT) CLEANED 🚮\n"
 	
 fclean : clean
-	@echo "🧼📚🧼📚🧼📚🧼📚🧼📚🧼📚🧼📚 | 🧼📚  FCLEANING $(BOLD_TEXT)LIBFT$(RESET_TEXT) 📚🧼 |🧼📚🧼📚🧼📚🧼📚🧼📚🧼📚🧼📚"
-	${LOADING_BAR}
 	@rm -rf ${LIBFT}
-	@echo "\n🚱📚🚱📚🚱📚🚱📚🚱📚🚱📚🚱📚 | 🚱📚 $(BOLD_TEXT)LIBFT$(RESET_TEXT) FCLEANED 📚🚱 |🚱📚🚱📚🚱📚🚱📚🚱📚🚱📚🚱📚\n\n"
-	
-	@echo "🧼🔌🧼🔌🧼🔌🧼🔌🧼🔌🧼🔌🧼🔌 | 🍀🔌 FCLEANING PIPEX $(BOLD_TEXT)MANDATORY$(RESET_TEXT) 🔌🍀 |🧼🔌🧼🔌🧼🔌🧼🔌🧼🔌🧼🔌🧼🔌"
-	$(LOADING_BAR)
+	@echo "$(BOLD_TEXT)LIBFT$(RESET_TEXT) FCLEANED 🚮\n"
 	@rm -rf ${NAME}
-	@echo "\n🚱🔌🚱🔌🚱🔌🚱🔌🚱🔌🚱🔌🚱🔌 | 🍀🔌 PIPEX $(BOLD_TEXT)MANDATORY$(RESET_TEXT) FCLEANED 🔌🍀 |🚱🔌🚱🔌🚱🔌🚱🔌🚱🔌🚱🔌🚱🔌\n"
-	@echo "🧼🔌🧼🔌🧼🔌🧼🔌🧼🔌🧼🔌🧼🔌 | 🔥🔌 FCLEANING PIPEX $(BOLD_TEXT)BONUS$(RESET_TEXT) 🔌🔥 |🧼🔌🧼🔌🧼🔌🧼🔌🧼🔌🧼🔌🧼🔌"
-	$(LOADING_BAR)
+	@echo "PIPEX $(BOLD_TEXT)MANDATORY$(RESET_TEXT) FCLEANED 🚮\n"
 	@rm -rf ${NAME_BONUS}
-	@echo "\n🚱🔌🚱🔌🚱🔌🚱🔌🚱🔌🚱🔌🚱🔌 | 🔥🔌 PIPEX $(BOLD_TEXT)BONUS$(RESET_TEXT) FCLEANED 🔌🔥 |🚱🔌🚱🔌🚱🔌🚱🔌🚱🔌🚱🔌🚱🔌\n"
+	@echo "PIPEX $(BOLD_TEXT)BONUS$(RESET_TEXT) FCLEANED 🚮\n"
 
 re : fclean all
+
+.PHONY : all bonus clean fclean re
